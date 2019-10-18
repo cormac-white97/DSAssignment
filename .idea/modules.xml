@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DSAssignment.iml" filepath="$PROJECT_DIR$/DSAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HTMLParse/HTMLParse.iml" filepath="$PROJECT_DIR$/HTMLParse/HTMLParse.iml" />
+    </modules>
+  </component>
+</project>
