@@ -8,13 +8,11 @@ public class Leader {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "leader_id",insertable = false, updatable = false)
-    int leaderId;
+    int leaderId = 0;
     String leaderFirstName;
     String leaderLastName;
     int leaderAge;
     String email;
-    Event eventId;
 
     public Leader(String leaderFirstName, String leaderLastName, int leaderAge, String email) {
         this.leaderFirstName = leaderFirstName;

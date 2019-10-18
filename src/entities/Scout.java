@@ -1,29 +1,42 @@
+/*
 package entities;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "Scout.findById", query = "select scoutObj from Event scoutObj where scoutObj.scoutId=: id" )})
+//@NamedQueries({@NamedQuery(name = "Scout.findById", query = "select scoutObj from Event scoutObj where scoutObj.scoutId=: id" )})
 public class Scout {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "scout_Id",insertable = false, updatable = false)
     private int scoutId;
     String scoutFirstname;
     String scoutLastName;
     int age;
-    @Column(name = "event_id")
-    Event eventId;
+    @JoinTable(name="CUSTOMER_SALE",joinColumns=@JoinColumn( name="event",referencedColumnName="eventId"),inverseJoinColumns=@JoinColumn(name="eventId", referencedColumnName="event"))
+    Event event;
+    //Set<Event> e;
+   // @ManyToMany(targetEntity = Event.class)
+    //public Collection<Event> getE() {
+    //    return e;
+    //}
 
-    public Scout(String scoutFirstname, String scoutLastName, int age, Event eventId) {
+    //public void setE(Set<Event> e) {
+    //    this.e = e;
+    //}
+
+    public Scout(String scoutFirstname, String scoutLastName, int age, Event event) {
         this.scoutFirstname = scoutFirstname;
         this.scoutLastName = scoutLastName;
         this.age = age;
-        this.eventId = eventId;
+        this.event = event;
     }
 
-    //@Access(AccessType.PROPERTY)
-    @ManyToMany(mappedBy = "scoutId")
+
+//@Access(AccessType.PROPERTY)
+
     public int getScoutId() {
         return scoutId;
     }
@@ -56,11 +69,12 @@ public class Scout {
         this.age = age;
     }
 
-    public Event getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Event eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
-}
+
+}*/

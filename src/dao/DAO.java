@@ -1,11 +1,8 @@
 package dao;
 
 import entities.Event;
-import entities.Leader;
-import entities.Scout;
 
 import javax.persistence.*;
-import java.util.List;
 
 public class DAO {
 
@@ -18,12 +15,19 @@ public class DAO {
         return event;
     }
 
-    public Scout findScoutById(int id){
+    public Event getAllEvents(){
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Event event = (Event) em.createNamedQuery("SELECT * FROM Event").getSingleResult();
+		return event;
+	}
+
+/*    public Scout findScoutById(int id){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Scout scout = (Scout) em.createNamedQuery("Scout.findById").setParameter("id", id).getSingleResult();
 		return scout;
-	}
+	}*/
 	public DAO(){
 
 	}
@@ -35,7 +39,6 @@ public class DAO {
 		em.getTransaction().commit();
 		em.close();
 	}
-
 
 	public void mergeObject(Object o ) {
 		EntityManager em = emf.createEntityManager();

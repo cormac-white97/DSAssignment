@@ -2,8 +2,11 @@ package main;
 
 import dao.DAO;
 import entities.Event;
+import entities.GearList;
+import entities.GroupList;
 import entities.Leader;
-import entities.Scout;
+//import entities.Scout;
+import org.hibernate.Session;
 
 import java.util.Date;
 
@@ -15,15 +18,27 @@ public class Test {
 		Date sDate = new Date(2020, 2, 5);
 		Date eDate = new Date(2020, 2, 23);
 
-		Leader leader = new Leader("Cormac", "White", 22, "cormac.white@gmail.com");
-		//Event  event = new Event(sDate , eDate, "Kerry", 300, leader);
+
+
+
+
+
 		//Scout scout = new Scout("John", "Doe", 16, event);
 
-
+		Leader leader = new Leader("Robbie", "O'Gara", 22, "ROB@gmail.com");
 		dao.persistObject(leader);
-		//dao.persistObject(event);
+
+		GearList gearList = new GearList("Camping");
+		dao.persistObject(gearList);
+
+		GroupList groupList = new GroupList("5th Wicklow, Bray");
+		dao.persistObject(groupList);
+
+		Event event = new Event(sDate,eDate,"Dublin",leader, groupList, gearList);
+		dao.persistObject(event);
+
 		//dao.persistObject(scout);
-		//dao.removeObject(dao.findEventById(3));
+		//System.out.println(dao.getAllEvents());
 	}
 
 	public static void main(String[] args) {

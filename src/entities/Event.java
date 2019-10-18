@@ -1,38 +1,57 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Id;
 
-@NamedQueries({@NamedQuery(name = "Event.findById", query = "select eventObj from Event eventObj where eventObj.eventId=: id" )})
+@NamedQueries({@NamedQuery(name = "Event.findById", query = "select eventObj from Event eventObj where eventObj.eventId=: id")})
+
 @Entity
-public class Event {
+public class Event implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int eventId;
-    @Column(name ="start_date")
+    @Column(name = "start_date")
     Date startDate;
     @Column(name = "end_date")
     Date endDate;
     @Column(name = "location")
     String location;
-    @Column(name = "group_list_id")
-    int groupListId;
-    Scout scoutId;
-    //@Column(name = "organized_by")
-    //@JoinColumn(name="leaderId")
-    //Leader leaderId;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Leader.class)
+    Leader leader;
+    //Set<Scout> scout;
+    @ManyToOne
+    GroupList groupEventId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventGearList")
+    GearList gearList;
 
-    public Event(Date startDate, Date endDate, String location, int groupListId) {
+    public Event(Date startDate, Date endDate, String location, Leader leader, GroupList groupEventId, GearList gearList) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
-        this.groupListId = groupListId;
-        //this.leaderId = leaderId;
+        this.leader = leader;
+        this.groupEventId = groupEventId;
+        this.gearList = gearList;
     }
-   // @Access(AccessType.PROPERTY)
-    @OneToMany(mappedBy = "eventId")
+/* @ManyToMany(mappedBy = "event")
+   public Set<Scout> getScout() {
+        return scout;
+    }
 
+    public void setScout(Set<Scout> scout) {
+        this.scout = scout;
+    }*/
+
+    public Event(){
+
+    }
+
+
+
+    // @Access(AccessType.PROPERTY)
 
     public int getEventId() {
         return eventId;
@@ -66,19 +85,12 @@ public class Event {
         this.location = location;
     }
 
-    public int getGroupListId() {
-        return groupListId;
+
+    public Leader getLeader() {
+        return leader;
     }
 
-    public void setGroupListId(int groupListId) {
-        this.groupListId = groupListId;
+    public void setLeader(Leader leader) {
+        this.leader = leader;
     }
-
-    //public Leader getLeaderId() {
-    //    return leaderId;
-   // }
-
-    //public void setLeaderId(Leader leaderId) {
-    //    this.leaderId = leaderId;
-   // }
 }
