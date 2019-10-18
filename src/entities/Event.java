@@ -1,32 +1,37 @@
 package entities;
 
-import org.hibernate.Session;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Id;
+
 @NamedQueries({@NamedQuery(name = "Event.findById", query = "select eventObj from Event eventObj where eventObj.eventId=: id" )})
 @Entity
-public class Event implements Serializable {
-
-    @OneToMany
+public class Event {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int eventId;
-    private Date startDate;
-    private Date endDate;
-    private String location;
-    private int groupListId;
-    private Leader leaderId;
+    int eventId;
+    @Column(name ="start_date")
+    Date startDate;
+    @Column(name = "end_date")
+    Date endDate;
+    @Column(name = "location")
+    String location;
+    @Column(name = "group_list_id")
+    int groupListId;
+    Scout scoutId;
+    //@Column(name = "organized_by")
+    //@JoinColumn(name="leaderId")
+    //Leader leaderId;
 
-    public Event(Date startDate, Date endDate, String location, int groupListId, Leader leaderId ) {
+    public Event(Date startDate, Date endDate, String location, int groupListId) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
         this.groupListId = groupListId;
-        this.leaderId = leaderId;
+        //this.leaderId = leaderId;
     }
+   // @Access(AccessType.PROPERTY)
+    @OneToMany(mappedBy = "eventId")
 
 
     public int getEventId() {
@@ -69,17 +74,11 @@ public class Event implements Serializable {
         this.groupListId = groupListId;
     }
 
-    public Leader getLeaderId() {
-        return leaderId;
-    }
+    //public Leader getLeaderId() {
+    //    return leaderId;
+   // }
 
-    public void setLeaderId(Leader leaderId) {
-        this.leaderId = leaderId;
-    }
-
-    public Event() {
-
-    }
-
-
+    //public void setLeaderId(Leader leaderId) {
+    //    this.leaderId = leaderId;
+   // }
 }

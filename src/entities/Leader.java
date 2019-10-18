@@ -1,28 +1,27 @@
 package entities;
 
-import org.jetbrains.annotations.Contract;
-
 import javax.persistence.*;
+import javax.persistence.Id;
 
 @Entity
 public class Leader {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int leaderId;
-    private String leaderFirstName;
-    private String leaderLastName;
-    private int leaderAge;
-    private String email;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "leader_id",insertable = false, updatable = false)
+    int leaderId;
+    String leaderFirstName;
+    String leaderLastName;
+    int leaderAge;
+    String email;
+    Event eventId;
 
-    @Contract(pure = true)
     public Leader(String leaderFirstName, String leaderLastName, int leaderAge, String email) {
         this.leaderFirstName = leaderFirstName;
         this.leaderLastName = leaderLastName;
         this.leaderAge = leaderAge;
         this.email = email;
     }
-    @OneToMany
     public int getLeaderId() {
         return leaderId;
     }

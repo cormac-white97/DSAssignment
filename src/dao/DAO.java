@@ -2,6 +2,7 @@ package dao;
 
 import entities.Event;
 import entities.Leader;
+import entities.Scout;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +17,13 @@ public class DAO {
         Event event = (Event) em.createNamedQuery("Event.findById").setParameter("id", id).getSingleResult();
         return event;
     }
+
+    public Scout findScoutById(int id){
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Scout scout = (Scout) em.createNamedQuery("Scout.findById").setParameter("id", id).getSingleResult();
+		return scout;
+	}
 	public DAO(){
 
 	}
