@@ -1,6 +1,9 @@
 package entities;
 
 import javax.persistence.*;
+@NamedQueries({@NamedQuery(name = "GearList.findListById", query = "select gearListObj from GearList gearListObj where gearListObj.gearListId=: id"),
+        @NamedQuery(name = "GearList.getAllGear", query = "FROM GearList")
+})
 
 @Entity
 public class GearList {
@@ -11,6 +14,15 @@ public class GearList {
     @OneToOne(mappedBy = "gearList", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     Event eventGearList = new Event();
+
+    @Override
+    public String toString() {
+        return "GearList{" +
+                "gearListId=" + gearListId +
+                ", gearType='" + gearType + '\'' +
+                ", eventGearList=" + eventGearList +
+                '}';
+    }
 
     public GearList(){
 

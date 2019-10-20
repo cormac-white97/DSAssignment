@@ -2,7 +2,9 @@ package entities;
 
 import javax.persistence.*;
 import javax.persistence.Id;
-
+@NamedQueries({@NamedQuery(name = "Leader.findLeaderById", query = "select leaderObj from Leader leaderObj where leaderObj.leaderId=: id"),
+        @NamedQuery(name = "Leader.getAllLeaders", query = "FROM Leader")
+})
 @Entity
 public class Leader {
 
@@ -13,6 +15,21 @@ public class Leader {
     String leaderLastName;
     int leaderAge;
     String email;
+
+    public Leader(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "Leader{" +
+                "leaderId=" + leaderId +
+                ", leaderFirstName='" + leaderFirstName + '\'' +
+                ", leaderLastName='" + leaderLastName + '\'' +
+                ", leaderAge=" + leaderAge +
+                ", email='" + email + '\'' +
+                '}';
+    }
 
     public Leader(String leaderFirstName, String leaderLastName, int leaderAge, String email) {
         this.leaderFirstName = leaderFirstName;

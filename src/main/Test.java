@@ -19,26 +19,24 @@ public class Test {
 		Date eDate = new Date(2020, 2, 23);
 
 
-
-
-
-
 		//Scout scout = new Scout("John", "Doe", 16, event);
 
 		Leader leader = new Leader("Robbie", "O'Gara", 22, "ROB@gmail.com");
-		dao.persistObject(leader);
+		//dao.persistObject(leader);
 
 		GearList gearList = new GearList("Camping");
-		dao.persistObject(gearList);
+		//dao.persistObject(gearList);
 
 		GroupList groupList = new GroupList("5th Wicklow, Bray");
-		dao.persistObject(groupList);
+		//dao.persistObject(groupList);
 
 		Event event = new Event(sDate,eDate,"Dublin",leader, groupList, gearList);
-		dao.persistObject(event);
-
-		//dao.persistObject(scout);
+		//dao.persistObject(event);
 		//System.out.println(dao.getAllEvents());
+		//dao.removeObject(dao.findEventById(3));
+		//dao.persistObject(scout);
+		dao.getAllEvents();
+		dao.getAllLeaders();
 	}
 
 	public static void main(String[] args) {

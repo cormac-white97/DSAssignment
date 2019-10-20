@@ -4,8 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Id;
+@NamedQueries({@NamedQuery(name = "Event.findById", query = "select eventObj from Event eventObj where eventObj.eventId=: id"),
+        @NamedQuery(name = "Event.getAllEvents", query = "FROM Event")
+})
 
-@NamedQueries({@NamedQuery(name = "Event.findById", query = "select eventObj from Event eventObj where eventObj.eventId=: id")})
+
 
 @Entity
 public class Event implements Serializable {
@@ -27,6 +30,19 @@ public class Event implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eventGearList")
     GearList gearList;
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventId=" + eventId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", location='" + location + '\'' +
+                ", leader=" + leader.getLeaderId() +
+                ", groupEventId=" + groupEventId.getGroupId() +
+                ", gearList=" + gearList.getGearListId() +
+                '}';
+    }
 
     public Event(Date startDate, Date endDate, String location, Leader leader, GroupList groupEventId, GearList gearList) {
         this.startDate = startDate;
